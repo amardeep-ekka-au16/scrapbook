@@ -90,7 +90,7 @@ const GOOGLE_CLIENT_SECRET = 'qTAzJA88qgVhiHJHu-e_QEgR';
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://scrapbook12.herokuapp.com/google/callback"
+    callbackURL: "https://scrapbook12.herokuapp.com/google/callback"
 },
     function (accessToken, refreshToken, profile, done) {
 
