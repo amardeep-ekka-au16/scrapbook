@@ -84,12 +84,12 @@ passport.deserializeUser(function (obj, cb) {
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const { reset } = require('nodemon')
 const GOOGLE_CLIENT_ID = '433128550035-g74hkuurcetvsgukk2kofsfv2qvtd9ci.apps.googleusercontent.com';
-const GOOGLE_CLIENT_SECRET = 'B_LmSwqoZ-xa2QwNZStYQi9C';
+const GOOGLE_CLIENT_SECRET = '6LhQaP86H_7IgTDRsiH-qLSO';
 
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://scrapbook12.herokuapp.com/google/callback"
+    callbackURL: "https://scrapbook12.herokuapp.com/google/callback"
 },
     function (accessToken, refreshToken, profile, done) {
 
