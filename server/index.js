@@ -68,7 +68,8 @@ var userProfile
 app.use(passport.initialize())
 
 app.get('/google/success', (req, res) => {
-    res.send(userProfile)
+  res.session.email = req.user.emails[0].value
+  res.redirect('/home')
 })
 
 app.get('/error', (req, res) => res.send("error logging in"))
@@ -84,12 +85,12 @@ passport.deserializeUser(function (obj, cb) {
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const { reset } = require('nodemon')
 const GOOGLE_CLIENT_ID = '433128550035-g74hkuurcetvsgukk2kofsfv2qvtd9ci.apps.googleusercontent.com';
-const GOOGLE_CLIENT_SECRET = '6LhQaP86H_7IgTDRsiH-qLSO';
+const GOOGLE_CLIENT_SECRET = 'B_LmSwqoZ-xa2QwNZStYQi9C';
 
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "https://scrapbook12.herokuapp.com/google/callback"
+    callbackURL: "http://scrapbook12.herokuapp.com/google/callback"
 },
     function (accessToken, refreshToken, profile, done) {
 
@@ -104,7 +105,7 @@ app.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/error' }),
     function (req, res) {
         // Successful authentication, redirect success.
-        res.redirect('/home');
+        res.redirect('/success');
     });
 
 app.get('/signup', (req, res) => {
@@ -139,7 +140,7 @@ app.get('/home', (req, res) => {
         if (err) throw err
         if (req.session.email) {
             res.render('home', {
-                email: req.session.emai,
+                //email: req.session.emai,
                 list: user
             })
         } else {

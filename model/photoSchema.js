@@ -3,7 +3,7 @@ var photoSchema = new mongoose.Schema({
     image:String,
     title:String,
     caption:String
-
+    
 })
 
 mongoose.model('photo',photoSchema)
