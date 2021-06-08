@@ -67,10 +67,10 @@ var passport = require('passport')
 var userProfile
 app.use(passport.initialize())
 
-// app.get('/google/success', (req, res) => {
-//   res.session.email = req.user.emails[0].value
-//   res.redirect('/home')
-// })
+ app.get('/google/success', (req, res) => {
+   res.session.email = req.user.emails[0].value
+   res.redirect('/home')
+ })
 
 app.get('/error', (req, res) => res.send("error logging in"))
 
@@ -105,8 +105,8 @@ app.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/error' }),
     function (req, res) {
         // Successful authentication, redirect success.
-        res.session.email = req.user.emails[0].value
-        res.redirect('/home')
+        
+        res.redirect('success')
     });
 
 app.get('/signup', (req, res) => {
