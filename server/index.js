@@ -70,7 +70,10 @@ app.use(passport.initialize())
  app.get('/google/success', (req, res) => {
 
   users.findOne({ email: req.user.emails[0].value }, (err, email) => {
-        if (email) return res.status(400).render('home');
+        if (email){
+            req.session.email = req.user.emails[0].value;
+            res.status(400).render('home');
+        } 
         users.create({
             name: req.user.displayName,
             email: req.user.emails[0].value,
@@ -78,6 +81,7 @@ app.use(passport.initialize())
             ph_no: req.body.ph_no
             }, (err, user) => {
                 if (err) throw err;
+                req.session.email = req.user.emails[0].value;
                 res.status(200).render('home',{success:"Successful registered"});
         });
     });
